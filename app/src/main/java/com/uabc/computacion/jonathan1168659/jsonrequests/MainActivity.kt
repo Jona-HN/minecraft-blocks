@@ -1,9 +1,8 @@
 package com.uabc.computacion.jonathan1168659.jsonrequests
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.*
 import com.android.volley.toolbox.*
 import com.google.gson.Gson
@@ -14,6 +13,7 @@ class MainActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityMainBinding
     private var requestQueue: RequestQueue? = null
+    private var blocks = ArrayList<Block>()
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -24,24 +24,43 @@ class MainActivity : AppCompatActivity()
         requestQueue = Volley.newRequestQueue(this)
 
         binding.newJoke.setOnClickListener {
-            jsonParse()
+            getResponse(object : VolleyCallback
+            {
+                override fun onSuccessResponse(blocksFetched: ArrayList<Block>)
+                {
+                    blocks = blocksFetched
+                    blocks.forEach{ block ->
+                        Log.i("test", "$block")
+                    }
+                }
+            })
         }
     }
 
-    private fun jsonParse()
+    private fun getResponse(callback: VolleyCallback)
     {
-        val objetos = ArrayList<Block>()
         val url = "https://minecraft-ids.grahamedgecombe.com/items.json"
         val request = JsonArrayRequest(Request.Method.GET, url, null,
             { response ->
                 try
                 {
+                    val gson = Gson()
+                    val blocks = ArrayList<Block>()
+
                     for (i in 0 until response.length())
                     {
-                        val objeto = response.get(i)
-                        Log.i("test", "$objeto")
-
+                        try
+                        {
+                            val block = gson.fromJson(response.getJSONObject(i).toString(), Block::class.java)
+                            blocks.add(block)
+                        }
+                        catch (e: JSONException)
+                        {
+                            Log.i("warning", "Ocurrió un error al parsear los datos")
+                        }
                     }
+
+                    callback.onSuccessResponse(blocks)
                 }
                 catch (e: Exception) {e.printStackTrace() }
             },
