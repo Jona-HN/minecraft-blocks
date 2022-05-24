@@ -14,7 +14,7 @@ data class Block (
 {
     override fun toString(): String
     {
-        return "Block(id = $type:$meta, name= '$name')"
+        return "{ $type:$meta '$name' (minecraft:$textType) }"
     }
 }
 
