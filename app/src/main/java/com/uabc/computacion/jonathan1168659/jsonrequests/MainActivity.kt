@@ -2,7 +2,10 @@ package com.uabc.computacion.jonathan1168659.jsonrequests
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.*
 import com.android.volley.toolbox.*
 import com.google.gson.Gson
@@ -23,6 +26,14 @@ class MainActivity : AppCompatActivity()
 
         requestQueue = Volley.newRequestQueue(this)
 
+        val blocksAdapter = BlocksAdapter(blocks, this)
+        binding.listRecyclerView.setHasFixedSize(true)
+        // Linear Layout
+//        binding.listRecyclerView.layoutManager = LinearLayoutManager(this)
+        // Grid Layout
+        val columns = 2
+        binding.listRecyclerView.layoutManager = GridLayoutManager(this, columns)
+
         binding.newJoke.setOnClickListener {
             getResponse(object : VolleyCallback
             {
@@ -32,6 +43,8 @@ class MainActivity : AppCompatActivity()
                     blocks.forEach{ block ->
                         Log.i("test", "$block")
                     }
+                    blocksAdapter.itemList = blocks
+                    binding.listRecyclerView.adapter = blocksAdapter
                 }
             })
         }
