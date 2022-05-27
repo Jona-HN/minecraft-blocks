@@ -3,7 +3,6 @@
     <string name="blocks_button">Get blocks data</string>
     <string name="block_id">(%1$d:%2$d)</string>
     <string name="blockIconDescription">Bloque de minecraft</string>
-    <string name="recipe">Recipe</string>
     <string name="menu_linear_layout">Linear layout</string>
     <string name="menu_grid_layout">Grid layout</string>
 </resources>

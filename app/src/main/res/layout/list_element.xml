@@ -52,18 +52,6 @@
                 android:layout_margin="2dp"
                 tools:text="type:meta" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/blockRecipe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="6dp"
-            android:text="@string/recipe"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:ignore="RelativeOverlap" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
