@@ -2,10 +2,9 @@ package com.uabc.computacion.jonathan1168659.jsonrequests
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.*
 import com.android.volley.*
 import com.android.volley.toolbox.*
 import com.google.gson.Gson
@@ -28,11 +27,8 @@ class MainActivity : AppCompatActivity()
 
         val blocksAdapter = BlocksAdapter(blocks, this)
         binding.listRecyclerView.setHasFixedSize(true)
-        // Linear Layout
-//        binding.listRecyclerView.layoutManager = LinearLayoutManager(this)
-        // Grid Layout
-        val columns = 2
-        binding.listRecyclerView.layoutManager = GridLayoutManager(this, columns)
+        // Linear Layout por defecto
+        binding.listRecyclerView.layoutManager = LinearLayoutManager(this)
 
         binding.newJoke.setOnClickListener {
             getResponse(object : VolleyCallback
@@ -48,6 +44,8 @@ class MainActivity : AppCompatActivity()
                 }
             })
         }
+
+        setSupportActionBar(binding.toolbar)
     }
 
     private fun getResponse(callback: VolleyCallback)
@@ -81,5 +79,26 @@ class MainActivity : AppCompatActivity()
         )
 
         requestQueue?.add(request)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean
+    {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+
+        val newLayout: RecyclerView.LayoutManager = when (item.itemId)
+        {
+            R.id.option_linearLayout -> LinearLayoutManager(this)
+            R.id.option_gridLayout -> GridLayoutManager(this, 2)
+            else -> LinearLayoutManager(this)
+        }
+
+        binding.listRecyclerView.layoutManager = newLayout
+
+        return super.onOptionsItemSelected(item)
     }
 }
