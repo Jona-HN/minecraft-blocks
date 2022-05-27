@@ -33,6 +33,8 @@ class BlocksAdapter (
 
         fun bindData(item: Block, context: Context)
         {
+            val resId = context.resources.getIdentifier(item.getId(), "drawable", context.packageName)
+            binding.blockIcon.setImageResource(resId)
             binding.blockName.text = item.name
             binding.blockId.text = context.resources.getString(R.string.block_id, item.type, item.meta)
         }
