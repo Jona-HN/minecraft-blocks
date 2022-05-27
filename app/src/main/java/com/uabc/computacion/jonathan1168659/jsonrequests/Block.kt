@@ -16,5 +16,7 @@ data class Block (
     {
         return "{ $type:$meta '$name' (minecraft:$textType) }"
     }
+
+    fun getId() = "_${type}_${meta}"
 }
 
