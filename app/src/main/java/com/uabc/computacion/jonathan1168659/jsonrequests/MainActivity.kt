@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity()
                         try
                         {
                             val block = gson.fromJson(response.getJSONObject(i).toString(), Block::class.java)
+                            Log.i("test", "$block")
                             blocks.add(block)
                         }
                         catch (e: JSONException)
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity()
 
                     callback.onSuccessResponse(blocks)
                 }
-                catch (e: Exception) {e.printStackTrace() }
+                catch (e: Exception) { e.printStackTrace() }
             },
             { error -> error.printStackTrace()}
         )
