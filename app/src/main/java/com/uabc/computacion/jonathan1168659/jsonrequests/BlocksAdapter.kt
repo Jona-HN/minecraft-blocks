@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.*
 import com.uabc.computacion.jonathan1168659.jsonrequests.databinding.ListElementBinding
 
@@ -12,6 +13,8 @@ class BlocksAdapter (
     private val context: Context
 ) : RecyclerView.Adapter<BlocksAdapter.ViewHolder>()
 {
+    val onItemClickListener = MutableLiveData<Block>()
+
     override fun getItemCount() = itemList.size
 
     override fun onCreateViewHolder(
@@ -24,6 +27,7 @@ class BlocksAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
+        holder.itemView.setOnClickListener { onItemClickListener.value = itemList[position] }
         holder.bindData(itemList[position], context)
     }
 

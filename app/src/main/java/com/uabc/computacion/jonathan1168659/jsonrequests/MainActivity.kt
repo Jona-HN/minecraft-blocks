@@ -3,6 +3,7 @@ package com.uabc.computacion.jonathan1168659.jsonrequests
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.*
 import com.android.volley.*
@@ -46,6 +47,10 @@ class MainActivity : AppCompatActivity()
         }
 
         setSupportActionBar(binding.toolbar)
+
+        blocksAdapter.onItemClickListener.observe(this) { block ->
+            Toast.makeText(this, "${block.name}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getResponse(callback: VolleyCallback)
