@@ -12,6 +12,8 @@ data class Block (
 
 )
 {
+    val recipe : String by lazy { "craft_${name?.filterNot { c -> c.isWhitespace() }?.lowercase()}" }
+
     override fun toString(): String
     {
         return "{ $type:$meta '$name' (minecraft:$textType) }"
