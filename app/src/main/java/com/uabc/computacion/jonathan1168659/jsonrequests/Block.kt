@@ -12,7 +12,12 @@ data class Block (
 
 )
 {
-    val recipe : String by lazy { "craft_${name?.filterNot { c -> c.isWhitespace() }?.lowercase()}" }
+    val recipe : String by lazy {
+        "craft_${
+            name?.filterNot { c -> c.isWhitespace() }
+                ?.replace("'", "_")
+                ?.lowercase()
+        }" }
 
     override fun toString(): String
     {
