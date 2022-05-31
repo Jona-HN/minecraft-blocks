@@ -1,5 +1,6 @@
 package com.uabc.computacion.jonathan1168659.jsonrequests
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -49,7 +50,25 @@ class MainActivity : AppCompatActivity()
         setSupportActionBar(binding.toolbar)
 
         blocksAdapter.onItemClickListener.observe(this) { block ->
-            Toast.makeText(this, "${block.name}", Toast.LENGTH_SHORT).show()
+            showRecipe(block)
+        }
+    }
+
+    private fun showRecipe(block: Block)
+    {
+        val recipeImgRes = resources.getIdentifier(block.recipe, "drawable", packageName)
+        Log.i("test", "${block.recipe} = $recipeImgRes")
+
+        if (recipeImgRes != 0)
+        {
+            val intent = Intent(this, BlockRecipeActivity::class.java)
+            intent.putExtra("blockName", block.name)
+            intent.putExtra("recipeImgRes", recipeImgRes)
+            startActivity(intent)
+        }
+        else
+        {
+            Toast.makeText(this, "Este bloque no tienen receta", Toast.LENGTH_LONG).show()
         }
     }
 
