@@ -6,4 +6,5 @@
     <string name="menu_linear_layout">Linear layout</string>
     <string name="menu_grid_layout">Grid layout</string>
     <string name="block_recipe_desc">Receta del bloque</string>
+    <string name="search_text">Search item…</string>
 </resources>

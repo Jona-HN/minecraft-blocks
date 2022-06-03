@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.*
 import com.android.volley.*
 import com.android.volley.toolbox.*
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity()
     private lateinit var binding: ActivityMainBinding
     private var requestQueue: RequestQueue? = null
     private var blocks = ArrayList<Block>()
+    private lateinit var blocksAdapter: BlocksAdapter
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity()
 
         requestQueue = Volley.newRequestQueue(this)
 
-        val blocksAdapter = BlocksAdapter(blocks, this)
+        blocksAdapter = BlocksAdapter(blocks, this)
         binding.listRecyclerView.setHasFixedSize(true)
         // Linear Layout por defecto
         binding.listRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -109,6 +111,20 @@ class MainActivity : AppCompatActivity()
     override fun onCreateOptionsMenu(menu: Menu): Boolean
     {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
+        {
+            override fun onQueryTextSubmit(query: String?) = false
+
+            override fun onQueryTextChange(newText: String?): Boolean
+            {
+                blocksAdapter.filter.filter(newText)
+                return false
+            }
+        })
+
         return true
     }
 
