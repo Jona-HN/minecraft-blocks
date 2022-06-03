@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity()
         }
         else
         {
-            Toast.makeText(this, "Este bloque no tienen receta", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Este bloque no tienen receta", Toast.LENGTH_SHORT).show()
         }
     }
 
