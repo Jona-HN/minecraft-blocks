@@ -12,6 +12,7 @@ data class Block (
 
 )
 {
+    var hasRecipe = false
     val recipe : String by lazy {
         "craft_${
             name?.filterNot { c -> c.isWhitespace() }
