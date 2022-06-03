@@ -41,6 +41,7 @@ class BlocksAdapter (
             binding.blockIcon.setImageResource(resId)
             binding.blockName.text = item.name
             binding.blockId.text = context.resources.getString(R.string.block_id, item.type, item.meta)
+            binding.recipeIcon.visibility = if (item.hasRecipe) View.VISIBLE else View.INVISIBLE
         }
 
         companion object
