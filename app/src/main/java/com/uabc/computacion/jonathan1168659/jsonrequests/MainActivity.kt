@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity()
                 {
                     blocks = blocksFetched
                     blocks.forEach{ block ->
+                        block.hasRecipe = findBlockRecipe(block)
                         Log.i("test", "$block")
                     }
                     blocksAdapter.itemList = blocks
@@ -59,11 +60,11 @@ class MainActivity : AppCompatActivity()
 
     private fun showRecipe(block: Block)
     {
-        val recipeImgRes = resources.getIdentifier(block.recipe, "drawable", packageName)
-        Log.i("test", "${block.recipe} = $recipeImgRes")
-
-        if (recipeImgRes != 0)
+        if (block.hasRecipe)
         {
+            val recipeImgRes = resources.getIdentifier(block.recipe, "drawable", packageName)
+            Log.i("test", "${block.recipe} = $recipeImgRes")
+
             val intent = Intent(this, BlockRecipeActivity::class.java)
             intent.putExtra("blockName", block.name)
             intent.putExtra("recipeImgRes", recipeImgRes)
