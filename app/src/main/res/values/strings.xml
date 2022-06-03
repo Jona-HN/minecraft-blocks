@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Minecraft Blocks</string>
+    <string name="app_name">Minecraft crafting guide</string>
     <string name="blocks_button">Get blocks data</string>
     <string name="block_id">(%1$d:%2$d)</string>
     <string name="blockIconDescription">Bloque de minecraft</string>
