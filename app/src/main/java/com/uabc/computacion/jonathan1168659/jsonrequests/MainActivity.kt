@@ -75,6 +75,12 @@ class MainActivity : AppCompatActivity()
         }
     }
 
+    private fun findBlockRecipe(block: Block): Boolean
+    {
+        val recipeImgRes = resources.getIdentifier(block.recipe, "drawable", packageName)
+        return recipeImgRes != 0
+    }
+
     private fun getResponse(callback: VolleyCallback)
     {
         val url = "https://minecraft-ids.grahamedgecombe.com/items.json"
